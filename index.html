@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>PHYSICS LAB — Кулон заңы 3.1.2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <header class="header">
+    <div class="brand">
+      <div class="atom">⚛</div>
+      <div>
+        <strong>PHYSICS LAB</strong>
+        <small>3.1.2 • Электр заряды. Кулон заңы</small>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="course">1-КУРС • ФИЗИКА</span>
+      <span id="timer">00:00</span>
+    </div>
+  </header>
+
+  <main id="screen"></main>
+
+<div class="live-clock">
+  <span class="clock-label">ҚАЗІРГІ УАҚЫТ</span>
+  <strong id="currentTime">--:--:--</strong>
+  <small>Алматы уақыты</small>
+</div>
+
+  <footer class="toolbar">
+    <div class="progress-area">
+      <span id="pageNumber">1 / 1</span>
+      <div class="progress">
+        <div id="progressFill"></div>
+      </div>
+    </div>
+    <nav class="buttons">
+      <button onclick="openAttendance()">👥 Оқушылар</button>
+      <button onclick="openTeams()">🏆 Командалар</button>
+      <button onclick="openPanel('mathPanel')">🧮 Математика</button>
+      <button onclick="openPanel('physicsPanel')">⚡ Физика</button>
+      <button onclick="changePage(-1)">← Артқа</button>
+      <button class="primary" onclick="changePage(1)">Келесі →</button>
+    </nav>
+  </footer>
+</div>
+
+<!-- ОҚУШЫЛАР -->
+<section id="attendancePanel" class="floating wide hidden">
+  <div class="panel-head drag-handle">
+    <strong>👥 Оқушылардың қатысуы</strong>
+    <button onclick="closePanel('attendancePanel')">✕</button>
+  </div>
+
+  <p class="hint">
+    Сабаққа келген оқушыларды белгілеңіз.
+    Келмегендер автоматты түрде командаға кірмейді.
+  </p>
+
+  <div class="mini-actions">
+    <button onclick="markAll(true)">Барлығы бар</button>
+    <button onclick="markAll(false)">Барлығы жоқ</button>
+  </div>
+
+  <div id="attendanceList" class="student-list"></div>
+
+  <div class="add-row">
+    <input id="newStudent" maxlength="60"
+           placeholder="Жаңа оқушының есімі">
+    <button onclick="addStudent()">Қосу</button>
+  </div>
+
+  <p id="attendanceCount" class="hint"></p>
+
+  <button class="primary full" onclick="shuffleTeams(true)">
+    🎲 Автоматты 3 командаға бөлу
+  </button>
+</section>
+
+<!-- КОМАНДАЛАР -->
+<section id="teamsPanel" class="floating wide hidden">
+  <div class="panel-head drag-handle">
+    <strong>🏆 Командалардың құрамы</strong>
+    <button onclick="closePanel('teamsPanel')">✕</button>
+  </div>
+
+  <div id="teamLists"></div>
+
+  <button class="primary full" onclick="shuffleTeams(true)">
+    🎲 Қайта араластыру
+  </button>
+</section>
+
+<!-- МАТЕМАТИКА -->
+<section id="mathPanel" class="floating hidden">
+  <div class="panel-head drag-handle">
+    <strong>🧮 Математикалық калькулятор</strong>
+    <button onclick="closePanel('mathPanel')">✕</button>
+  </div>
+
+  <input id="mathDisplay" readonly
+         placeholder="Өрнек енгізіңіз">
+
+  <div id="mathKeys" class="math-keys"></div>
+
+  <div id="mathResult" class="calc-result">
+    Есептеу нәтижесі
+  </div>
+
+  <p class="hint">Бұрыштар градуспен есептеледі.</p>
+</section>
+
+<!-- ФИЗИКА -->
+<section id="physicsPanel"
+         class="floating physics-panel hidden">
+  <div class="panel-head drag-handle">
+    <strong>⚡ Физикалық калькулятор</strong>
+    <button onclick="closePanel('physicsPanel')">✕</button>
+  </div>
+
+  <label for="formulaSelect">Формула</label>
+  <select id="formulaSelect"
+          onchange="selectFormula()"></select>
+
+  <label for="unknownSelect">Нені табу керек?</label>
+  <select id="unknownSelect"
+          onchange="drawPhysicsFields()"></select>
+
+  <div id="physicsFields"></div>
+
+  <button class="primary full"
+          onclick="calculatePhysics()">Есептеу</button>
+
+  <div id="physicsResult" class="calc-result">
+    Берілгендерді SI жүйесінде енгізіңіз.
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
